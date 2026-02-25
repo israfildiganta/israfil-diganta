@@ -1,0 +1,225 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CSS Custom Properties for Design System */
+:root {
+  /* Font Family */
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  /* Colors - Neutral Palette */
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-200: #e5e5e5;
+  --color-neutral-300: #d4d4d4;
+  --color-neutral-400: #a3a3a3;
+  --color-neutral-500: #737373;
+  --color-neutral-600: #525252;
+  --color-neutral-700: #404040;
+  --color-neutral-800: #262626;
+  --color-neutral-900: #171717;
+  --color-neutral-950: #0a0a0a;
+  
+  /* Transition Defaults */
+  --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-gentle: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --transition-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  
+  /* Duration */
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+}
+
+/* Base Styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.7;
+  font-weight: 400;
+  background-color: #ffffff;
+  color: #171717;
+}
+
+/* Typography Reset */
+h1, h2, h3, h4, h5, h6,
+p, blockquote, figure, pre {
+  margin: 0;
+}
+
+/* Links */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--duration-normal) var(--transition-smooth);
+}
+
+a:hover {
+  color: #525252;
+}
+
+/* Images */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* Form Elements */
+input, button, textarea, select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+/* Lists */
+ul, ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Selection */
+::selection {
+  background-color: #171717;
+  color: #ffffff;
+}
+
+/* Scrollbar Styling - Premium Feel */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f5f5f5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d4d4d4;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a3a3a3;
+}
+
+/* Utility Classes for Typography System */
+
+/* Hero Title */
+@layer components {
+  .text-hero {
+    @apply text-6xl md:text-7xl font-bold tracking-tight;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+  
+  .text-section-title {
+    @apply text-4xl md:text-5xl font-semibold;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+  
+  .text-subtitle-premium {
+    @apply text-xl text-neutral-600;
+    line-height: 1.4;
+  }
+  
+  .text-body-premium {
+    @apply text-base;
+    line-height: 1.7;
+  }
+  
+  /* Container */
+  .container-premium {
+    @apply mx-auto max-w-container-max px-6 md:px-12;
+  }
+  
+  /* Section Padding */
+  .section-padding {
+    @apply py-section-sm md:py-section-md lg:py-section-lg;
+  }
+  
+  /* Smooth Transition */
+  .transition-smooth {
+    @apply transition-all duration-300 ease-smooth;
+  }
+  
+  /* Focus Styles */
+  .focus-ring {
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2;
+  }
+}
+
+/* Animation Utilities */
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 300ms var(--transition-smooth) forwards;
+  }
+  
+  .animate-fade-in-up {
+    animation: fadeInUp 500ms var(--transition-smooth) forwards;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 500ms var(--transition-smooth) forwards;
+  }
+  
+  .animate-scale-in {
+    animation: scaleIn 300ms var(--transition-spring) forwards;
+  }
+  
+  /* Stagger children animations */
+  .stagger-children > * {
+    opacity: 0;
+    animation: fadeInUp 500ms var(--transition-smooth) forwards;
+  }
+  
+  .stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+  .stagger-children > *:nth-child(2) { animation-delay: 100ms; }
+  .stagger-children > *:nth-child(3) { animation-delay: 200ms; }
+  .stagger-children > *:nth-child(4) { animation-delay: 300ms; }
+  .stagger-children > *:nth-child(5) { animation-delay: 400ms; }
+  .stagger-children > *:nth-child(6) { animation-delay: 500ms; }
+  .stagger-children > *:nth-child(7) { animation-delay: 600ms; }
+  .stagger-children > *:nth-child(8) { animation-delay: 700ms; }
+  
+  /* Hide scrollbar */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Text balance for better typography */
+  .text-balance {
+    text-wrap: balance;
+  }
+}
