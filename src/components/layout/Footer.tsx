@@ -4,6 +4,8 @@
  * Matches adhamdannaway.com footer style
  */
 
+import { useCallback } from 'react';
+
 const navigationLinks = [
   { label: 'about', href: '#about' },
   { label: 'learn', href: '#learn' },
@@ -15,13 +17,46 @@ const navigationLinks = [
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
+  const scrollToTop = useCallback(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }, []);
+
   return (
-    <footer className="bg-[#F5F5F5] py-12">
-      <div className="max-w-[1200px] mx-auto px-6 md:px-10">
+    <footer className="bg-[#F5F5F5]">
+      {/* Back to Top Button - Centered above footer */}
+      <div className="flex justify-center -mb-6 relative z-10">
+        <button
+          onClick={scrollToTop}
+          aria-label="Back to Top"
+          className="bg-[#F5F5F5] text-[#333] p-3 rounded-full
+                   hover:bg-[#e8e8e8] transition-colors duration-200
+                   focus:outline-none focus:ring-2 focus:ring-[#333]/30 focus:ring-offset-2 focus:ring-offset-[#F5F5F5]
+                   cursor-pointer"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M12 19V5M5 12l7-7 7 7" />
+          </svg>
+        </button>
+      </div>
+
+      <div className="max-w-[1200px] mx-auto px-6 md:px-10 py-12">
         <div className="flex flex-col sm:flex-row justify-between items-center">
           {/* Left: Copyright */}
           <p className="text-[#333] text-sm order-2 sm:order-1 mt-4 sm:mt-0">
-            © {currentYear} Israfil Diganta
+            © {currentYear} Your Name
           </p>
 
           {/* Right: Navigation Links */}
