@@ -4,10 +4,10 @@ import { Container } from './Container';
 
 // Navigation items as per requirements
 const navItems = [
-  { key: 'about', label: 'About', href: '#about' },
-  { key: 'learn', label: 'Learn', href: '#learn' },
-  { key: 'portfolio', label: 'Portfolio', href: '#portfolio' },
-  { key: 'blog', label: 'Blog', href: '#blog' },
+  { key: 'about', label: 'About', href: '#/about' },
+  { key: 'learn', label: 'Learn', href: '#/learn' },
+  { key: 'portfolio', label: 'Portfolio', href: '#/portfolio' },
+  { key: 'blog', label: 'Blog', href: '#/blog' },
   { key: 'contact', label: 'Contact', href: '#/contact' },
 ];
 

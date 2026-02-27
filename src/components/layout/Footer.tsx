@@ -7,11 +7,11 @@
 import { useCallback } from 'react';
 
 const navigationLinks = [
-  { label: 'about', href: '#about' },
-  { label: 'learn', href: '#learn' },
-  { label: 'portfolio', href: '#portfolio' },
-  { label: 'blog', href: '#blog' },
-  { label: 'contact', href: '#contact' },
+  { label: 'about', href: '#/about' },
+  { label: 'learn', href: '#/learn' },
+  { label: 'portfolio', href: '#/portfolio' },
+  { label: 'blog', href: '#/blog' },
+  { label: 'contact', href: '#/contact' },
 ];
 
 export function Footer() {
@@ -23,6 +23,22 @@ export function Footer() {
       behavior: 'smooth',
     });
   }, []);
+
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    // Check if this is a route link (starts with #/)
+    if (href.startsWith('#/')) {
+      e.preventDefault();
+      window.location.hash = href.slice(1); // Remove # and set the hash
+      return;
+    }
+    
+    // For section links, scroll to the element
+    e.preventDefault();
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <footer className="bg-[#F5F5F5]">
@@ -69,6 +85,7 @@ export function Footer() {
                 <li key={link.label} className="flex items-center">
                   <a
                     href={link.href}
+                    onClick={(e) => handleLinkClick(e, link.href)}
                     className="text-[#555] text-sm uppercase tracking-wide 
                              hover:text-[#333] hover:opacity-80 transition-all duration-200
                              focus:outline-none focus:ring-2 focus:ring-[#333]/20 focus:ring-offset-2 focus:ring-offset-[#F5F5F5] rounded-sm"

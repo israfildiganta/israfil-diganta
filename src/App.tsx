@@ -5,22 +5,41 @@ import { Typography } from 'antd';
 import { motion } from 'framer-motion';
 import { Contact } from './components/sections/Contact';
 import { About } from './components/sections/About';
+import { SelectedWork } from './components/sections/SelectedWork';
+import { BlogPreview } from './components/sections/BlogPreview';
 import profileImage from './assets/Israfil Diganta.png';
 import './index.css';
 
 const { Title, Paragraph, Text } = Typography;
 
-const projects = [
-  { title: 'Project Name', description: 'Project description goes here.' },
-];
+// Route definitions
+type Route = '/' | '/contact' | '/about' | '/portfolio' | '/blog' | '/learn';
 
 // Simple hash-based routing
 function useHashRoute() {
-  const [hash, setHash] = useState(window.location.hash.slice(1) || '/');
+  const [hash, setHash] = useState<Route>(() => {
+    const path = window.location.hash.slice(1) || '/';
+    // Handle both /contact and contact as valid contact routes
+    if (path === '/contact' || path === 'contact') {
+      return '/contact' as Route;
+    }
+    // Default valid routes
+    if (['/', '/about', '/portfolio', '/blog', '/learn'].includes(path)) {
+      return path as Route;
+    }
+    return '/' as Route;
+  });
 
   useEffect(() => {
     const handleHashChange = () => {
-      setHash(window.location.hash.slice(1) || '/');
+      const path = window.location.hash.slice(1) || '/';
+      if (path === '/contact' || path === 'contact') {
+        setHash('/contact' as Route);
+      } else if (['/', '/about', '/portfolio', '/blog', '/learn'].includes(path)) {
+        setHash(path as Route);
+      } else {
+        setHash('/' as Route);
+      }
     };
 
     window.addEventListener('hashchange', handleHashChange);
@@ -28,6 +47,133 @@ function useHashRoute() {
   }, []);
 
   return hash;
+}
+
+// Page components
+function AboutPage() {
+  return (
+    <>
+      <section className="py-24 md:py-32">
+        <Container>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+          >
+            <Title
+              level={1}
+              className="text-4xl md:text-6xl font-medium tracking-tight leading-[1.1] max-w-3xl mb-8"
+              style={{ fontWeight: 500 }}
+            >
+              About
+            </Title>
+          </motion.div>
+        </Container>
+      </section>
+      <About 
+        imageSrc={profileImage}
+        imageAlt="Israfil Diganta"
+      />
+    </>
+  );
+}
+
+function PortfolioPage() {
+  return (
+    <>
+      <section className="py-24 md:py-32">
+        <Container>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+          >
+            <Title
+              level={1}
+              className="text-4xl md:text-6xl font-medium tracking-tight leading-[1.1] max-w-3xl mb-8"
+              style={{ fontWeight: 500 }}
+            >
+              Portfolio
+            </Title>
+            <Paragraph className="text-lg text-gray-600 max-w-xl">
+              A selection of my recent work and projects.
+            </Paragraph>
+          </motion.div>
+        </Container>
+      </section>
+      <section className="py-24">
+        <Container>
+          <SelectedWork />
+        </Container>
+      </section>
+    </>
+  );
+}
+
+function LearnPage() {
+  return (
+    <>
+      <section className="py-24 md:py-32">
+        <Container>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+          >
+            <Title
+              level={1}
+              className="text-4xl md:text-6xl font-medium tracking-tight leading-[1.1] max-w-3xl mb-8"
+              style={{ fontWeight: 500 }}
+            >
+              Learn
+            </Title>
+            <Paragraph className="text-lg text-gray-600 max-w-xl">
+              Tutorials, articles, and guides to help you learn and grow.
+            </Paragraph>
+          </motion.div>
+        </Container>
+      </section>
+      <section className="py-24 bg-gray-50">
+        <Container>
+          <Paragraph className="text-lg text-gray-600">
+            Coming soon - tutorials and learning resources.
+          </Paragraph>
+        </Container>
+      </section>
+    </>
+  );
+}
+
+function BlogPage() {
+  return (
+    <>
+      <section className="py-24 md:py-32">
+        <Container>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+          >
+            <Title
+              level={1}
+              className="text-4xl md:text-6xl font-medium tracking-tight leading-[1.1] max-w-3xl mb-8"
+              style={{ fontWeight: 500 }}
+            >
+              Blog
+            </Title>
+            <Paragraph className="text-lg text-gray-600 max-w-xl">
+              Thoughts on design, development, and technology.
+            </Paragraph>
+          </motion.div>
+        </Container>
+      </section>
+      <section className="py-24">
+        <Container>
+          <BlogPreview />
+        </Container>
+      </section>
+    </>
+  );
 }
 
 function HomePage() {
@@ -56,7 +202,7 @@ function HomePage() {
         </Container>
       </section>
 
-      {/* Work Section */}
+      {/* Selected Work Preview */}
       <section id="work" className="py-24">
         <Container>
           <motion.div
@@ -70,36 +216,50 @@ function HomePage() {
             </Title>
           </motion.div>
           
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.5, staggerChildren: 0.1 }}
-          >
-            {projects.map((project, index) => (
-              <motion.article
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-                className="border-b border-gray-100 pb-12"
-              >
-                <Text className="text-xl font-medium block">{project.title}</Text>
-                <Paragraph className="mt-2 text-gray-600">{project.description}</Paragraph>
-              </motion.article>
-            ))}
+          <SelectedWork />
+          
+          <motion.div className="mt-8">
+            <a
+              href="#/portfolio"
+              className="inline-block text-lg border-b border-black pb-1 hover:text-gray-600 hover:border-gray-600 transition-colors"
+            >
+              View All Work →
+            </a>
           </motion.div>
         </Container>
       </section>
 
-      {/* About Section */}
-      <About 
-        imageSrc={profileImage}
-        imageAlt="Israfil Diganta"
-      />
+      {/* About Preview */}
+      <section id="about" className="py-24">
+        <Container>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.5 }}
+          >
+            <Title level={2} className="text-2xl font-medium mb-12" style={{ fontWeight: 500 }}>
+              About
+            </Title>
+          </motion.div>
+          
+          <About 
+            imageSrc={profileImage}
+            imageAlt="Israfil Diganta"
+          />
+          
+          <motion.div className="mt-8">
+            <a
+              href="#/about"
+              className="inline-block text-lg border-b border-black pb-1 hover:text-gray-600 hover:border-gray-600 transition-colors"
+            >
+              More About Me →
+            </a>
+          </motion.div>
+        </Container>
+      </section>
 
-      {/* Contact Section */}
+      {/* Contact Preview */}
       <section id="contact" className="py-24">
         <Container>
           <motion.div
@@ -135,6 +295,14 @@ function App() {
   // Route rendering
   const renderRoute = () => {
     switch (hash) {
+      case '/about':
+        return <AboutPage />;
+      case '/portfolio':
+        return <PortfolioPage />;
+      case '/learn':
+        return <LearnPage />;
+      case '/blog':
+        return <BlogPage />;
       case '/contact':
         return <Contact />;
       case '/':
