@@ -8,7 +8,7 @@ const navItems = [
   { key: 'learn', label: 'Learn', href: '#learn' },
   { key: 'portfolio', label: 'Portfolio', href: '#portfolio' },
   { key: 'blog', label: 'Blog', href: '#blog' },
-  { key: 'contact', label: 'Contact', href: '#contact' },
+  { key: 'contact', label: 'Contact', href: '#/contact' },
 ];
 
 // Social media links with larger icons
@@ -70,6 +70,15 @@ export function Navbar() {
   }, []);
 
   const handleNavClick = (e: React.MouseEvent, href: string) => {
+    // Check if this is a route link (starts with #/)
+    if (href.startsWith('#/')) {
+      e.preventDefault();
+      window.location.hash = href.slice(1); // Remove # and set the hash
+      setMobileMenuOpen(false);
+      return;
+    }
+    
+    // For section links, scroll to the element
     e.preventDefault();
     const element = document.querySelector(href);
     if (element) {

@@ -1,7 +1,9 @@
+import { useState, useEffect } from 'react';
 import { Layout } from './layout/Layout';
 import { Container } from './components/layout/Container';
-import { Typography, Card } from 'antd';
-import { motion, type Variants } from 'framer-motion';
+import { Typography } from 'antd';
+import { motion } from 'framer-motion';
+import { Contact } from './components/sections/Contact';
 import './index.css';
 
 const { Title, Paragraph, Text } = Typography;
@@ -10,31 +12,25 @@ const projects = [
   { title: 'Project Name', description: 'Project description goes here.' },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
+// Simple hash-based routing
+function useHashRoute() {
+  const [hash, setHash] = useState(window.location.hash.slice(1) || '/');
 
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: 'easeOut' as const,
-    },
-  },
-};
+  useEffect(() => {
+    const handleHashChange = () => {
+      setHash(window.location.hash.slice(1) || '/');
+    };
 
-function App() {
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  return hash;
+}
+
+function HomePage() {
   return (
-    <Layout>
+    <>
       {/* Hero Section */}
       <section id="hero" className="py-24 md:py-32">
         <Container>
@@ -73,15 +69,18 @@ function App() {
           </motion.div>
           
           <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.5, staggerChildren: 0.1 }}
           >
             {projects.map((project, index) => (
               <motion.article
                 key={index}
-                variants={itemVariants}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
                 className="border-b border-gray-100 pb-12"
               >
                 <Text className="text-xl font-medium block">{project.title}</Text>
@@ -132,16 +131,37 @@ function App() {
               Have a project in mind? Let's talk.
             </Paragraph>
             <motion.a
-              href="mailto:hello@example.com"
+              href="#/contact"
               className="inline-block text-lg border-b border-black pb-1 hover:text-gray-600 hover:border-gray-600 transition-colors"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.2 }}
             >
-              hello@example.com
+              Contact Page →
             </motion.a>
           </motion.div>
         </Container>
       </section>
+    </>
+  );
+}
+
+function App() {
+  const hash = useHashRoute();
+
+  // Route rendering
+  const renderRoute = () => {
+    switch (hash) {
+      case '/contact':
+        return <Contact />;
+      case '/':
+      default:
+        return <HomePage />;
+    }
+  };
+
+  return (
+    <Layout>
+      {renderRoute()}
     </Layout>
   );
 }
