@@ -7,6 +7,7 @@ import { Contact } from './components/sections/Contact';
 import { About } from './components/sections/About';
 import { SelectedWork } from './components/sections/SelectedWork';
 import { BlogPreview } from './components/sections/BlogPreview';
+import { DualPersonaHero } from './components/sections/DualPersonaHero';
 import profileImage from './assets/Israfil Diganta.png';
 import './index.css';
 
@@ -179,28 +180,8 @@ function BlogPage() {
 function HomePage() {
   return (
     <>
-      {/* Hero Section */}
-      <section id="hero" className="py-24 md:py-32">
-        <Container>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-          >
-            <Title
-              level={1}
-              className="text-4xl md:text-6xl font-medium tracking-tight leading-[1.1] max-w-3xl"
-              style={{ fontWeight: 500, marginBottom: 0 }}
-            >
-              I create digital experiences that blend simplicity with purpose.
-            </Title>
-            <Paragraph className="mt-6 text-lg text-gray-600 max-w-xl" style={{ marginTop: 24 }}>
-              A product designer and developer focused on crafting thoughtful interfaces
-              and seamless interactions.
-            </Paragraph>
-          </motion.div>
-        </Container>
-      </section>
+      {/* Dual Persona Hero Section */}
+      <DualPersonaHero />
 
       {/* Selected Work Preview */}
       <section id="work" className="py-24">
