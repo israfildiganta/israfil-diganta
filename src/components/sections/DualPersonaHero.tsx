@@ -89,20 +89,6 @@ export function DualPersonaHero() {
       className="relative min-h-screen w-full overflow-hidden bg-white"
       style={{ cursor: isMobile ? 'default' : 'none' }}
     >
-      {/* Desktop: Custom cursor follower */}
-      {!isMobile && (
-        <div 
-          className="fixed pointer-events-none z-50 transition-all duration-150 ease-out"
-          style={{
-            left: `calc(${mousePosition}% - 12px)`,
-            top: '50%',
-            transform: 'translateY(-50%)',
-          }}
-        >
-          <div className="w-6 h-6 rounded-full border-2 border-black" />
-        </div>
-      )}
-
       {/* Split Background */}
       <div className="absolute inset-0 flex">
         {/* Designer Side Background */}
@@ -157,14 +143,6 @@ export function DualPersonaHero() {
           </div>
         </motion.div>
       </div>
-
-      {/* Center Divider Line */}
-      {!isMobile && (
-        <div 
-          className="absolute top-0 bottom-0 w-px bg-gray-300 z-20 transition-all duration-150"
-          style={{ left: `${mousePosition}%` }}
-        />
-      )}
 
       {/* Portrait Images Layer */}
       <div className="absolute inset-0 flex items-center justify-center">
