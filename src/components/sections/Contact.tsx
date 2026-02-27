@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Container } from '../layout/Container';
+import profileImage from '../../assets/Israfil Diganta.png';
 
 /**
  * Contact Page Component
@@ -55,9 +56,9 @@ export function Contact() {
   };
 
   return (
-    <div className="bg-[#F2F2F2] min-h-screen">
+    <div className="bg-[#FFFFFF] min-h-screen">
       {/* TOP CONTACT HERO SECTION */}
-      <section className="bg-[#F2F2F2] py-16 md:py-24 lg:py-32">
+      <section className="bg-[#FFFFFF] py-16 md:py-24 lg:py-32">
         <Container>
           <div className="grid md:grid-cols-2 items-center gap-10 lg:gap-16">
             {/* LEFT SIDE - Text Content */}
@@ -135,8 +136,8 @@ export function Contact() {
               {/* Large portrait image - slightly overflow bottom */}
               <div className="relative overflow-visible">
                 <img
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=1000&fit=crop&crop=face"
-                  alt="Portrait"
+                  src={profileImage}
+                  alt="Israfil Diganta"
                   className="w-full h-auto object-cover md:translate-y-4"
                 />
               </div>
@@ -146,7 +147,7 @@ export function Contact() {
       </section>
 
       {/* EMAIL FORM SECTION */}
-      <section className="bg-[#F2F2F2] py-16 md:py-24">
+      <section className="bg-[#FFFFFF] py-16 md:py-24">
         <Container>
           <div className="max-w-4xl mx-auto">
             {/* Heading */}
@@ -266,9 +267,9 @@ export function Contact() {
           <button
             onClick={scrollToTop}
             aria-label="Back to Top"
-            className="relative bg-[#F2F2F2] text-[#333] p-4 rounded-full
+            className="relative bg-[#FFFFFF] text-[#333] p-4 rounded-full
                      hover:bg-[#e8e8e8] transition-colors duration-200
-                     focus:outline-none focus:ring-2 focus:ring-[#333]/30 focus:ring-offset-2 focus:ring-offset-[#F2F2F2]
+                     focus:outline-none focus:ring-2 focus:ring-[#333]/30 focus:ring-offset-2 focus:ring-offset-[#FFFFFF]
                      cursor-pointer -mt-8 md:-mt-10"
             style={{
               boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.1)',

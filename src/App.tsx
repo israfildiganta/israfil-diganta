@@ -4,6 +4,8 @@ import { Container } from './components/layout/Container';
 import { Typography } from 'antd';
 import { motion } from 'framer-motion';
 import { Contact } from './components/sections/Contact';
+import { About } from './components/sections/About';
+import profileImage from './assets/Israfil Diganta.png';
 import './index.css';
 
 const { Title, Paragraph, Text } = Typography;
@@ -92,28 +94,10 @@ function HomePage() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-24">
-        <Container>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.5 }}
-          >
-            <Title level={2} className="text-2xl font-medium mb-12" style={{ fontWeight: 500 }}>
-              About
-            </Title>
-            <div className="max-w-2xl">
-              <Paragraph className="text-lg text-gray-600 leading-relaxed">
-                I'm a designer and developer with a passion for creating clean,
-                functional, and beautiful digital products. With years of experience
-                in both design and engineering, I bridge the gap between aesthetics
-                and technology.
-              </Paragraph>
-            </div>
-          </motion.div>
-        </Container>
-      </section>
+      <About 
+        imageSrc={profileImage}
+        imageAlt="Israfil Diganta"
+      />
 
       {/* Contact Section */}
       <section id="contact" className="py-24">
