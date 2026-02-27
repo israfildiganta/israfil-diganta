@@ -17,9 +17,11 @@ const CODE_SNIPPETS = [
 
 export function DualPersonaHero() {
   const [mousePosition, setMousePosition] = useState(50); // 0 = left, 50 = center, 100 = right
+  const [displayPosition, setDisplayPosition] = useState(50); // For smooth cursor following
   const [isHovering, setIsHovering] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const animationRef = useRef<number | undefined>(undefined);
 
   // Check for mobile viewport
   useEffect(() => {
@@ -66,22 +68,61 @@ export function DualPersonaHero() {
     };
   }, []);
 
-  // Calculate clip paths based on mouse position
-  const leftClipPath = isMobile 
-    ? 'polygon(0 0, 100% 0, 100% 100%, 0 100%)' // Full on mobile
-    : isHovering 
-      ? `polygon(0 0, ${mousePosition + 10}% 0, ${mousePosition + 10}% 100%, 0 100%)`
-      : 'polygon(0 0, 50% 0, 50% 100%, 0 100%)';
+  // Smooth cursor following - interpolates display position towards mouse position
+  useEffect(() => {
+    const smoothFollow = () => {
+      // Smooth interpolation factor (lower = slower)
+      const ease = 0.08;
+      
+      setDisplayPosition(prev => {
+        const target = isHovering ? mousePosition : 50;
+        const diff = target - prev;
+        
+        // Stop animation when close enough
+        if (Math.abs(diff) < 0.1) {
+          return target;
+        }
+        
+        return prev + diff * ease;
+      });
+      
+      animationRef.current = requestAnimationFrame(smoothFollow);
+    };
+    
+    animationRef.current = requestAnimationFrame(smoothFollow);
+    
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, [mousePosition, isHovering]);
 
+  // Calculate split position - follows mouse smoothly
+  const getSplitPosition = () => {
+    if (isMobile) return 50;
+    if (!isHovering) return 50;
+    return displayPosition;
+  };
+
+  const splitPos = getSplitPosition();
+
+  // Left side clip path - reveals like a line sweep from left
+  const leftClipPath = isMobile 
+    ? 'polygon(0 0, 100% 0, 100% 100%, 0 100%)'
+    : `polygon(0 0, ${splitPos}% 0, ${splitPos}% 100%, 0 100%)`;
+
+  // Right side clip path - reveals like a line sweep from right
   const rightClipPath = isMobile
     ? 'polygon(0 0, 100% 0, 100% 100%, 0 100%)'
-    : isHovering
-      ? `polygon(${mousePosition - 10}% 0, 100% 0, 100% 100%, ${mousePosition - 10}% 100%)`
-      : 'polygon(50% 0, 100% 0, 100% 100%, 50% 100%)';
+    : `polygon(${splitPos}% 0, 100% 0, 100% 100%, ${splitPos}% 100%)`;
 
-  // Opacity calculations for text
-  const leftOpacity = isMobile ? 1 : isHovering ? Math.max(0.3, (100 - mousePosition) / 100) : 0.5;
-  const rightOpacity = isMobile ? 1 : isHovering ? Math.max(0.3, mousePosition / 100) : 0.5;
+  // Opacity - fades the side you're moving away from
+  const leftOpacity = isMobile ? 1 : isHovering ? Math.max(0.2, (100 - displayPosition) / 100) : 0.5;
+  const rightOpacity = isMobile ? 1 : isHovering ? Math.max(0.2, displayPosition / 100) : 0.5;
+
+  // Image parallax offset
+  const imageOffset = isMobile ? 0 : (displayPosition - 50) * 0.3;
 
   return (
     <section 
@@ -95,9 +136,7 @@ export function DualPersonaHero() {
         <motion.div 
           className="absolute inset-0"
           style={{ 
-            background: isMobile 
-              ? '#FFFFFF' 
-              : '#FFFFFF',
+            background: '#FFFFFF',
             opacity: leftOpacity,
           }}
         >
@@ -125,9 +164,7 @@ export function DualPersonaHero() {
         <motion.div 
           className="absolute inset-0"
           style={{ 
-            background: isMobile
-              ? '#FFFFFF'
-              : '#FFFFFF',
+            background: '#FFFFFF',
             opacity: rightOpacity,
           }}
         >
@@ -144,29 +181,33 @@ export function DualPersonaHero() {
         </motion.div>
       </div>
 
-      {/* Portrait Images Layer */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        {/* Designer Image (Left side) */}
+      {/* Portrait Images Layer - Split Reveal */}
+      <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+        {/* Designer Image (Left side) - clipped from left */}
         <div 
           className="absolute inset-0 flex items-center justify-center"
           style={{ clipPath: leftClipPath }}
         >
-          <img 
+          <motion.img 
             src={designerImage} 
             alt="Designer persona" 
-            className="max-w-md md:max-w-lg lg:max-w-xl h-auto object-cover"
+            className="max-w-lg md:max-w-xl lg:max-w-6xl h-auto object-cover"
+            animate={!isMobile ? { x: imageOffset } : {}}
+            transition={{ type: 'tween', ease: 'linear', duration: 0.1 }}
           />
         </div>
 
-        {/* Coder Image (Right side) */}
+        {/* Coder Image (Right side) - clipped from right */}
         <div 
           className="absolute inset-0 flex items-center justify-center"
           style={{ clipPath: rightClipPath }}
         >
-          <img 
+          <motion.img 
             src={coderImage} 
             alt="Coder persona" 
-            className="max-w-md md:max-w-lg lg:max-w-xl h-auto object-cover"
+            className="max-w-lg md:max-w-xl lg:max-w-6xl h-auto object-cover"
+            animate={!isMobile ? { x: imageOffset } : {}}
+            transition={{ type: 'tween', ease: 'linear', duration: 0.1 }}
           />
         </div>
       </div>
@@ -177,11 +218,17 @@ export function DualPersonaHero() {
         <motion.div 
           className={`absolute left-0 top-0 bottom-0 flex flex-col justify-center px-8 md:px-16 lg:px-24 pointer-events-none
             ${isMobile ? 'relative w-full py-16' : 'w-1/2'}`}
-          style={{ opacity: isMobile ? 1 : leftOpacity }}
+          animate={{
+            opacity: isMobile ? 1 : leftOpacity,
+          }}
+          transition={{ duration: 0.3 }}
         >
           <motion.div
             initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: isMobile ? 1 : leftOpacity, x: 0 }}
+            animate={{ 
+              opacity: isMobile ? 1 : leftOpacity, 
+              x: 0 
+            }}
             transition={{ duration: 0.5 }}
             className="pointer-events-auto"
           >
@@ -198,11 +245,17 @@ export function DualPersonaHero() {
         <motion.div 
           className={`absolute right-0 top-0 bottom-0 flex flex-col justify-center px-8 md:px-16 lg:px-24 pointer-events-none
             ${isMobile ? 'hidden' : 'w-1/2'}`}
-          style={{ opacity: rightOpacity }}
+          animate={{
+            opacity: isMobile ? 1 : rightOpacity,
+          }}
+          transition={{ duration: 0.3 }}
         >
           <motion.div
             initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: rightOpacity, x: 0 }}
+            animate={{ 
+              opacity: isMobile ? 1 : rightOpacity, 
+              x: 0 
+            }}
             transition={{ duration: 0.5 }}
             className="pointer-events-auto text-right ml-auto"
           >
@@ -258,6 +311,7 @@ export function DualPersonaHero() {
           className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30"
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
+          style={{ opacity: isHovering ? 0.2 : 1 }}
         >
           <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center pt-2">
             <div className="w-1 h-2 bg-gray-400 rounded-full" />
