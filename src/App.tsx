@@ -8,11 +8,11 @@ import { About } from './components/sections/About';
 import { SelectedWork } from './components/sections/SelectedWork';
 import { Blog } from './components/sections/Blog';
 import { DualPersonaHero } from './components/sections/DualPersonaHero';
+import { Portfolio } from './components/sections/Portfolio';
 import { Learn } from './components/sections/Learn';
-import profileImage from './assets/Israfil Diganta.png';
 import './index.css';
 
-const { Title, Paragraph, Text } = Typography;
+const { Title, Paragraph } = Typography;
 
 // Route definitions
 type Route = '/' | '/contact' | '/about' | '/portfolio' | '/blog' | '/learn';
@@ -55,27 +55,7 @@ function useHashRoute() {
 function AboutPage() {
   return (
     <>
-      <section className="py-24 md:py-32">
-        <Container>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-          >
-            <Title
-              level={1}
-              className="text-4xl md:text-6xl font-medium tracking-tight leading-[1.1] max-w-3xl mb-8"
-              style={{ fontWeight: 500 }}
-            >
-              About
-            </Title>
-          </motion.div>
-        </Container>
-      </section>
-      <About 
-        imageSrc={profileImage}
-        imageAlt="Israfil Diganta"
-      />
+      <About />
     </>
   );
 }
@@ -83,31 +63,7 @@ function AboutPage() {
 function PortfolioPage() {
   return (
     <>
-      <section className="py-24 md:py-32">
-        <Container>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-          >
-            <Title
-              level={1}
-              className="text-4xl md:text-6xl font-medium tracking-tight leading-[1.1] max-w-3xl mb-8"
-              style={{ fontWeight: 500 }}
-            >
-              Portfolio
-            </Title>
-            <Paragraph className="text-lg text-gray-600 max-w-xl">
-              A selection of my recent work and projects.
-            </Paragraph>
-          </motion.div>
-        </Container>
-      </section>
-      <section className="py-24">
-        <Container>
-          <SelectedWork />
-        </Container>
-      </section>
+      <Portfolio />
     </>
   );
 }
@@ -175,10 +131,7 @@ function HomePage() {
             </Title>
           </motion.div>
           
-          <About 
-            imageSrc={profileImage}
-            imageAlt="Israfil Diganta"
-          />
+          <About />
           
           <motion.div className="mt-8">
             <a

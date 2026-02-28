@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import blogProfile from '../../assets/ID9.png';
 
 // Dummy data for blog posts
 const blogPosts = [
@@ -6,7 +7,7 @@ const blogPosts = [
     id: 1,
     title: "10 Advanced Dynamic Programming Patterns for LeetCode",
     excerpt: "A step-by-step logic and intuition guide to recognizing and solving complex DP problems efficiently in C++ and Java.",
-    author: "Your Name",
+    author: "Israfil Diganta",
     date: "Last updated 15 March 2026",
     imageUrl: "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=1200&h=600&fit=crop",
   },
@@ -14,7 +15,7 @@ const blogPosts = [
     id: 2,
     title: "Building Scalable Microservices with Spring Boot 3",
     excerpt: "The most practical and useful architectural guidelines to help you build robust backend systems using JPA, Kafka, and JWT authentication.",
-    author: "Your Name",
+    author: "Israfil Diganta",
     date: "Last updated 28 February 2026",
     imageUrl: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=600&fit=crop",
   },
@@ -22,7 +23,7 @@ const blogPosts = [
     id: 3,
     title: "Dockerizing Your Backend: Best Practices in 2026",
     excerpt: "My go-to strategies for optimizing Dockerfiles, reducing image sizes, and orchestrating multi-container environments with Docker Compose.",
-    author: "Your Name",
+    author:"Israfil Diganta",
     date: "Last updated 10 January 2026",
     imageUrl: "https://images.unsplash.com/photo-1605745341112-85968b19335b?w=1200&h=600&fit=crop",
   },
@@ -30,14 +31,14 @@ const blogPosts = [
     id: 4,
     title: "System Design: Scaling to 1 Million Active Users",
     excerpt: "Key things I've learned from studying top tech company architectures to help you design for high availability and low latency.",
-    author: "Your Name",
+    author: "Israfil Diganta",
     date: "Last updated 5 December 2025",
     imageUrl: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=600&fit=crop",
   },
 ];
 
 // Avatar URL using placeholder service
-const avatarUrl = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face";
+const avatarUrl = blogProfile;
 
 interface BlogPostProps {
   post: typeof blogPosts[0];

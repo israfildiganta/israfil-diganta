@@ -27,10 +27,9 @@ const itemVariants: Variants = {
 
 interface ProjectCardProps {
   project: (typeof projects)[number];
-  index: number;
 }
 
-function ProjectCard({ project, index }: ProjectCardProps) {
+function ProjectCard({ project }: ProjectCardProps) {
   return (
     <motion.article
       variants={itemVariants}
@@ -98,11 +97,10 @@ export function SelectedWork({ title = 'Selected Work' }: SelectedWorkProps) {
           viewport={{ once: true, margin: '-100px' }}
           className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12 md:gap-y-16"
         >
-          {projects.map((project, index) => (
+          {projects.map((project) => (
             <ProjectCard
               key={project.id}
               project={project}
-              index={index}
             />
           ))}
         </motion.div>
