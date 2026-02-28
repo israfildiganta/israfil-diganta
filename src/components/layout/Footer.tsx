@@ -72,7 +72,7 @@ export function Footer() {
         <div className="flex flex-col sm:flex-row justify-between items-center">
           {/* Left: Copyright */}
           <p className="text-[#333] text-sm order-2 sm:order-1 mt-4 sm:mt-0">
-            © {currentYear} Your Name
+            © {currentYear} Israfil Diganta
           </p>
 
           {/* Right: Navigation Links */}

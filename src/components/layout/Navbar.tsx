@@ -15,7 +15,7 @@ const navItems = [
 const socialLinks = [
   {
     key: 'twitter',
-    href: 'https://twitter.com',
+    href: 'https://x.com/IsrafilDiganta',
     label: 'Twitter',
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -25,7 +25,7 @@ const socialLinks = [
   },
   {
     key: 'linkedin',
-    href: 'https://linkedin.com',
+    href: 'https://www.linkedin.com/in/israfil-diganta-ba3218240/',
     label: 'LinkedIn',
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -35,7 +35,7 @@ const socialLinks = [
   },
   {
     key: 'facebook',
-    href: 'https://facebook.com',
+    href: 'https://www.facebook.com/israfil.diganta',
     label: 'Facebook',
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -45,7 +45,7 @@ const socialLinks = [
   },
   {
     key: 'instagram',
-    href: 'https://instagram.com',
+    href: 'https://www.instagram.com/digonto007/',
     label: 'Instagram',
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">

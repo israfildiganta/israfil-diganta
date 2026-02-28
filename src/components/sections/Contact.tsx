@@ -15,10 +15,10 @@ interface ContactFormData {
 }
 
 const socialLinks = [
-  { name: 'Twitter', href: 'https://twitter.com', color: '#1DA1F2' },
-  { name: 'Facebook', href: 'https://facebook.com', color: '#4267B2' },
-  { name: 'LinkedIn', href: 'https://linkedin.com', color: '#0077B5' },
-  { name: 'Instagram', href: 'https://instagram.com', color: '#E4405F' },
+  { name: 'Twitter', href: 'https://x.com/IsrafilDiganta', color: '#1DA1F2' },
+  { name: 'Facebook', href: 'https://www.facebook.com/israfil.diganta', color: '#4267B2' },
+  { name: 'LinkedIn', href: 'https://www.linkedin.com/in/israfil-diganta-ba3218240/', color: '#0077B5' },
+  { name: 'Instagram', href: 'https://www.instagram.com/digonto007/', color: '#E4405F' },
 ];
 
 export function Contact() {
