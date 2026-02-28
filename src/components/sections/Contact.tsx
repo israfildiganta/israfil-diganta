@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Container } from '../layout/Container';
-import profileImage from '../../assets/Israfil Diganta.png';
+import profileImage from '../../assets/ID9.png';
 
 /**
  * Contact Page Component
@@ -46,13 +46,6 @@ export function Contact() {
     
     setFormData({ name: '', email: '', message: '' });
     setIsSubmitting(false);
-  };
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
   };
 
   return (
@@ -260,37 +253,7 @@ export function Contact() {
         </Container>
       </section>
 
-      {/* CENTER ARROW DIVIDER */}
-      <div className="relative -mt-1">
-        {/* Circular half-bump with arrow */}
-        <div className="flex justify-center">
-          <button
-            onClick={scrollToTop}
-            aria-label="Back to Top"
-            className="relative bg-[#FFFFFF] text-[#333] p-4 rounded-full
-                     hover:bg-[#e8e8e8] transition-colors duration-200
-                     focus:outline-none focus:ring-2 focus:ring-[#333]/30 focus:ring-offset-2 focus:ring-offset-[#FFFFFF]
-                     cursor-pointer -mt-8 md:-mt-10"
-            style={{
-              boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.1)',
-            }}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M12 19V5M5 12l7-7 7 7" />
-            </svg>
-          </button>
-        </div>
-      </div>
+
     </div>
   );
 }

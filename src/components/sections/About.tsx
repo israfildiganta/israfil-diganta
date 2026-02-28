@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Container } from '../layout/Container';
-import profileImage from '../../assets/Israfil Diganta.png';
+import profileImage from '../../assets/ID9.png';
 
 // Placeholder images
 const PLACEHOLDER_IMAGES = [
