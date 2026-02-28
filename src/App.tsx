@@ -8,6 +8,7 @@ import { About } from './components/sections/About';
 import { SelectedWork } from './components/sections/SelectedWork';
 import { BlogPreview } from './components/sections/BlogPreview';
 import { DualPersonaHero } from './components/sections/DualPersonaHero';
+import { Learn } from './components/sections/Learn';
 import profileImage from './assets/Israfil Diganta.png';
 import './index.css';
 
@@ -114,33 +115,7 @@ function PortfolioPage() {
 function LearnPage() {
   return (
     <>
-      <section className="py-24 md:py-32">
-        <Container>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-          >
-            <Title
-              level={1}
-              className="text-4xl md:text-6xl font-medium tracking-tight leading-[1.1] max-w-3xl mb-8"
-              style={{ fontWeight: 500 }}
-            >
-              Learn
-            </Title>
-            <Paragraph className="text-lg text-gray-600 max-w-xl">
-              Tutorials, articles, and guides to help you learn and grow.
-            </Paragraph>
-          </motion.div>
-        </Container>
-      </section>
-      <section className="py-24 bg-gray-50">
-        <Container>
-          <Paragraph className="text-lg text-gray-600">
-            Coming soon - tutorials and learning resources.
-          </Paragraph>
-        </Container>
-      </section>
+      <Learn />
     </>
   );
 }
