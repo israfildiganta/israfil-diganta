@@ -72,9 +72,11 @@ function ProjectCard({ project }: ProjectCardProps) {
 
 interface SelectedWorkProps {
   title?: string;
+  limit?: number;
 }
 
-export function SelectedWork({ title = 'Selected Work' }: SelectedWorkProps) {
+export function SelectedWork({ title = 'Selected Work', limit }: SelectedWorkProps) {
+  const displayProjects = limit ? projects.slice(0, limit) : projects;
   return (
     <section className="py-24 bg-white">
       <Container>
@@ -97,7 +99,7 @@ export function SelectedWork({ title = 'Selected Work' }: SelectedWorkProps) {
           viewport={{ once: true, margin: '-100px' }}
           className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12 md:gap-y-16"
         >
-          {projects.map((project) => (
+          {(limit ? displayProjects : projects).map((project) => (
             <ProjectCard
               key={project.id}
               project={project}

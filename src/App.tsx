@@ -4,6 +4,7 @@ import { Contact } from './components/sections/Contact';
 import { About } from './components/sections/About';
 import { Blog } from './components/sections/Blog';
 import { DualPersonaHero } from './components/sections/DualPersonaHero';
+import { SelectedWork } from './components/sections/SelectedWork';
 import { Portfolio } from './components/sections/Portfolio';
 import { Learn } from './components/sections/Learn';
 import './index.css';
@@ -83,6 +84,9 @@ function HomePage() {
     <>
       {/* Dual Persona Hero Section */}
       <DualPersonaHero />
+
+      {/* Selected Work Preview - 2 items */}
+      <SelectedWork title="Selected Work" limit={2} />
     </>
   );
 }
