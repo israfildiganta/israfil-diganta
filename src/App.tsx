@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { Contact } from './components/sections/Contact';
 import { About } from './components/sections/About';
 import { SelectedWork } from './components/sections/SelectedWork';
-import { BlogPreview } from './components/sections/BlogPreview';
+import { Blog } from './components/sections/Blog';
 import { DualPersonaHero } from './components/sections/DualPersonaHero';
 import { Learn } from './components/sections/Learn';
 import profileImage from './assets/Israfil Diganta.png';
@@ -123,31 +123,7 @@ function LearnPage() {
 function BlogPage() {
   return (
     <>
-      <section className="py-24 md:py-32">
-        <Container>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-          >
-            <Title
-              level={1}
-              className="text-4xl md:text-6xl font-medium tracking-tight leading-[1.1] max-w-3xl mb-8"
-              style={{ fontWeight: 500 }}
-            >
-              Blog
-            </Title>
-            <Paragraph className="text-lg text-gray-600 max-w-xl">
-              Thoughts on design, development, and technology.
-            </Paragraph>
-          </motion.div>
-        </Container>
-      </section>
-      <section className="py-24">
-        <Container>
-          <BlogPreview />
-        </Container>
-      </section>
+      <Blog />
     </>
   );
 }
