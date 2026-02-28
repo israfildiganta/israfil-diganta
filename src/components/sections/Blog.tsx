@@ -100,7 +100,7 @@ export function Blog() {
             transition={{ duration: 0.6, ease: 'easeOut' }}
           >
             <h1 className="text-4xl md:text-6xl font-medium tracking-tight leading-[1.1] text-gray-900 mb-8" style={{ fontWeight: 500 }}>
-              Blog
+              blog
             </h1>
             <p className="text-lg text-gray-600 max-w-xl">
               Thoughts on design, development, and technology.

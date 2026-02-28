@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import featuredProjectImage from '../../assets/Crop1.png';
 
 // Portfolio projects data
 const portfolioProjects = [
@@ -46,7 +47,7 @@ function MiniProjectCard() {
     <div className="bg-gray-50 rounded-2xl p-4 cursor-pointer hover:bg-gray-100 transition-colors">
       <div className="relative overflow-hidden rounded-xl mb-3">
         <img
-          src="https://images.unsplash.com/photo-1522542550221-31fd8575f5f5?w=400&h=250&fit=crop"
+          src={featuredProjectImage}
           alt="Featured Project"
           className="w-full h-auto object-cover"
         />
